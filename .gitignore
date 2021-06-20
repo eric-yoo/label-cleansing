@@ -1,0 +1,11 @@
+# data
+data.tar.gz
+data
+label_book
+submission
+
+# model weights
+ckpts
+
+# vscode
+.vscode
