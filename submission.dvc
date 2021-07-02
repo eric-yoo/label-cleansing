@@ -1,0 +1,5 @@
+outs:
+- md5: 83af7456dd3c6ae4033e6bd167ff8e56.dir
+  size: 5907394
+  nfiles: 2881
+  path: submission
