@@ -1,0 +1,18 @@
+stages:
+  train:
+    cmd: python train.py
+    deps:
+    - submission
+    - label_book
+    - train.py
+    outs:
+    - output.txt
+  evaluate:
+    cmd: python evaluate.py
+    deps:
+    - submission
+    - label_book
+    - evaluate.py
+    metrics:
+    - scores.json:
+        cache: false

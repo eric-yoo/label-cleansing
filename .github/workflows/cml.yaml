@@ -24,7 +24,7 @@ jobs:
           pip install -r requirements.txt
 
           dvc pull submission --run-cache
-          python train.py
+          python evaluate.py
 
           cat metrics.txt >> report.md
           cml-send-comment report.md
