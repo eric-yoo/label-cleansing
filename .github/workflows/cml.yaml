@@ -23,7 +23,7 @@ jobs:
         run: |
           pip install -r requirements.txt
 
-          dvc pull data --run-cache
+          dvc pull submission --run-cache
           python train.py
 
           cat metrics.txt >> report.md
