@@ -70,10 +70,13 @@ if __name__ == "__main__":
 
     ## write result to file
     with open('metrics.txt', 'w') as f:
-        f.write(f"final loss: {loss}\n")
-        f.write(f"final acc: {acc}\n")
-        f.write(f"test loss {test_loss}\n")
-        f.write(f"test acc {test_acc}")
+        f.write(f"validation loss: {loss}\n")
+        f.write(f"validation acc: {acc}\n")
+        f.write(f"test set loss {test_loss}\n")
+        f.write(f"test set acc {test_acc}")
 
     with open('scores.json', "w") as fd:
-        json.dump({"test loss": test_loss, "test acc": test_acc}, fd, indent=4)
+        json.dump({
+            "validation loss": loss, "validation acc": acc,
+            "test loss": test_loss, "test acc": test_acc
+        }, fd, indent=4)
