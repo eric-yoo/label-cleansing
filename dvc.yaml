@@ -1,18 +1,18 @@
 stages:
   train:
-    cmd: python train.py
+    cmd: python src/train.py
     deps:
     - submission
     - label_book
-    - train.py
+    - src/train.py
     outs:
     - output.txt
   evaluate:
-    cmd: python evaluate.py
+    cmd: python src/evaluate.py
     deps:
     - submission
     - label_book
-    - evaluate.py
+    - src/evaluate.py
     metrics:
     - scores.json:
         cache: false

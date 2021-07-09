@@ -24,7 +24,10 @@ jobs:
           pip install -r requirements.txt
 
           dvc pull submission --run-cache
-          python evaluate.py
+          python src/evaluate.py
 
-          cat metrics.txt >> report.md
+          echo "# CML Report" > report.md
+
+          echo "## Metrics" >> report.md
+          dvc metrics diff master --show-md >> report.md
           cml-send-comment report.md
