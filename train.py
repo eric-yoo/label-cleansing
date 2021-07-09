@@ -8,6 +8,7 @@ directory = "submission"
 user_data = directory + "/train"
 valid_data = directory + "/val"
 test_data = "label_book" # this can be the label book, or any other test set you create
+n_epoch = 100
 
 ### DO NOT MODIFY BELOW THIS LINE, THIS IS THE FIXED MODEL ###
 batch_size = 8
@@ -78,27 +79,32 @@ if __name__ == "__main__":
     loss_0, acc_0 = model.evaluate(valid)
     print(f"loss {loss_0}, acc {acc_0}")
 
-    checkpoint = tf.keras.callbacks.ModelCheckpoint(
-        "ckpts/best_model",
-        monitor="val_accuracy",
-        mode="max",
-        save_best_only=True,
-        save_weights_only=True,
-    )
+    ## (disabled for local run) train model
+    # checkpoint = tf.keras.callbacks.ModelCheckpoint(
+    #     "ckpts/best_model",
+    #     monitor="val_accuracy",
+    #     mode="max",
+    #     save_best_only=True,
+    #     save_weights_only=True,
+    # )
 
-    history = model.fit(
-        train,
-        validation_data=valid,
-        epochs=100,
-        callbacks=[checkpoint],
-    )
+    # history = model.fit(
+    #     train,
+    #     validation_data=valid,
+    #     epochs=100,
+    #     callbacks=[checkpoint],
+    # )
 
-    model.load_weights("best_model")
+    # model.load_weights("ckpts/best_model")
 
+    ## load the weight file directly
+    model.load_weights("ckpts/best_model")
     loss, acc = model.evaluate(valid)
-    print(f"final loss {loss}, final acc {acc}")
-
     test_loss, test_acc = model.evaluate(test)
-    print(f"test loss {test_loss}, test acc {test_acc}")
 
-   
+    ## write result to file
+    with open('metrics.txt', 'w') as f:
+        f.write(f"final loss: {loss}\n")
+        f.write(f"final acc: {acc}\n")
+        f.write(f"test loss {test_loss}\n")
+        f.write(f"test acc {test_acc}")

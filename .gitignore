@@ -1,11 +1,18 @@
 # data
 data.tar.gz
-data
+# data
 label_book
-submission
+# submission
 
 # model weights
-ckpts
+!ckpts/
+ckpts/*
+!ckpts/best_model*
 
 # vscode
 .vscode
+/data
+/submission
+
+# local settings
+Pipfile*
