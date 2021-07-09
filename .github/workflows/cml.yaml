@@ -16,8 +16,11 @@ jobs:
       - name: cml
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pip3 install -r requirements.txt
+          dvc pull data --run-cache
           python train.py
 
           cat metrics.txt >> report.md
