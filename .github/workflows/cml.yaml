@@ -5,18 +5,24 @@ on: [push]
 jobs:
   run:
     runs-on: [ubuntu-latest]
-    container: docker://dvcorg/cml-py3:latest
+
     steps:
       - uses: actions/checkout@v2
-      - name: cml_run
-        shell: bash
+      - uses: iterative/setup-cml@v1
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.7'
+
+      - name: cml
         env:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          pip3 install -r requirements.txt
+          pip install dvc
           dvc pull data --run-cache
+
+          pip3 install -r requirements.txt
           python train.py
 
           cat metrics.txt >> report.md
