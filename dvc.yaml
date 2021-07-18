@@ -6,13 +6,14 @@ stages:
     - label_book
     - src/train.py
     outs:
-    - output.txt
+    - ckpts/best_model.data-00000-of-00001
   evaluate:
     cmd: python src/evaluate.py
     deps:
     - submission
     - label_book
     - src/evaluate.py
+    - ckpts/best_model.data-00000-of-00001
     metrics:
     - scores.json:
         cache: false

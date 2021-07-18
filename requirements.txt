@@ -1,1 +1,3 @@
 tensorflow
+dvc[s3]
+opencv-python

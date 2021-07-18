@@ -22,12 +22,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pip install -r requirements.txt
-
-          dvc pull submission --run-cache
-          python src/evaluate.py
-
-          echo "# CML Report" > report.md
-
-          echo "## Metrics" >> report.md
-          dvc metrics diff master --show-md >> report.md
-          cml-send-comment report.md
+          dvc pull data label_book --run-cache
+          dvc repro
