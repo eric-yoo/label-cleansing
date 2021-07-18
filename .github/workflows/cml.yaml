@@ -22,5 +22,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           pip install -r requirements.txt
-          dvc pull data label_book --run-cache
+          dvc pull data --run-cache
           dvc repro
